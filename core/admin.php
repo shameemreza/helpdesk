@@ -169,7 +169,7 @@ class admin extends db {
 	    $_link = $this->getDBH();
 	    
 	    switch($function) {
-	        ticket 'signin':
+	        case 'signin':
 	          if($status == 1) {
 	              $query = $_link->query('UPDATE `admin_settings` SET `allow_user_sign_in` = 1 WHERE `id` = 1');
 	              $query->execute();
@@ -178,7 +178,7 @@ class admin extends db {
 	              $query->execute();
 	          }
 	          break;
-	        ticket 'delete':
+	        case 'delete':
 	          if($status == 1) {
 	              $query = $_link->query('UPDATE `admin_settings` SET `self_delete_account` = 1 WHERE `id` = 1');
 	              $query->execute();
@@ -187,7 +187,7 @@ class admin extends db {
 	              $query->execute();
 	          }
 	          break;
-	        ticket 'register':
+	        case 'register':
 	          if($status == 1) {
 	              $query = $_link->query('UPDATE `admin_settings` SET `allow_new_user_register` = 1 WHERE `id` = 1');
 	              $query->execute();
@@ -196,7 +196,7 @@ class admin extends db {
 	              $query->execute();
 	          }
 	          break;
-	       ticket 'protection':
+	       case 'protection':
 	          if($status == 1) {
 	              $query = $_link->query('UPDATE `admin_settings` SET `enable_protection` = 1 WHERE `id` = 1');
 	              $query->execute();
@@ -227,19 +227,19 @@ class admin extends db {
         $_link = $this->getDBH();
         
         switch($option) {
-            ticket 'open':
+            case 'open':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `user` = :id AND `resolved` = 0');
                 $query->bindParam(':id', $id, PDO::PARAM_INT);
                 $query->execute();
                 return $query->rowCount();
                 break;
-            ticket 'resolved':
+            case 'resolved':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `user` = :id AND `resolved` = 1');
                 $query->bindParam(':id', $id, PDO::PARAM_INT);
                 $query->execute();
                 return $query->rowCount();
                 break;
-            ticket 'unanswered':
+            case 'unanswered':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `user` = :id AND `last_reply` = :id');
                 $query->bindParam(':id', $id, PDO::PARAM_INT);
                 $query->execute();
@@ -253,17 +253,17 @@ class admin extends db {
         $_link = $this->getDBH();
         
         switch($option) {
-            ticket 'open':
+            case 'open':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `resolved` = 0');
                 $query->execute();
                 return $query->rowCount();
                 break;
-            ticket 'resolved':
+            case 'resolved':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `resolved` = 1');
                 $query->execute();
                 return $query->rowCount();
                 break;
-            ticket 'unanswered':
+            case 'unanswered':
                 $query = $_link->prepare('SELECT f1.* FROM tickets f1 JOIN tickets f2 ON f1.user = f2.last_reply');
                 $query->execute();
                 
