@@ -249,19 +249,19 @@ class tickets extends db {
         $_link = $this->getDBH();
         
         switch($option) {
-            ticket 'open':
+            case 'open':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `user` = :id');
                 $query->bindParam(':id', $_COOKIE['user'], PDO::PARAM_INT);
                 $query->execute();
                 return $query->rowCount();
                 break;
-            ticket 'resolved':
+            case 'resolved':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `user` = :id AND `resolved` = 1');
                 $query->bindParam(':id', $_COOKIE['user'], PDO::PARAM_INT);
                 $query->execute();
                 return $query->rowCount();
                 break;
-            ticket 'unanswered':
+            case 'unanswered':
                 $query = $_link->prepare('SELECT * FROM `tickets` WHERE `user` = :id AND `last_reply` = :id');
                 $query->bindParam(':id', $_COOKIE['user'], PDO::PARAM_INT);
                 $query->execute();
