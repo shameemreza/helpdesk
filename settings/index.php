@@ -63,7 +63,7 @@
 			
 			<?php if($admin->site_settings('self_delete_account') == 1) {?>
 			
-			<div class="accordionButton">Deactivating Account</div>
+			<div class="accordionButton">Deactivating Account!</div>
 			<div class="accordionContent">
 				<p style="color:#e55">Please confirm that you wish to deactivate your account and lose all your data.</p>
 				<form method="post" id="delete_account">
